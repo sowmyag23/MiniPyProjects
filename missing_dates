@@ -1,0 +1,25 @@
+import pandas as pd
+
+def find_missing_months(file_path):
+    # Read data from the file
+    df = pd.read_csv(file_path, sep='\s+', parse_dates=['Date'], dayfirst=True)
+
+    # Extract the months from the 'Date' column
+    existing_months = df['Date'].dt.month.unique()
+
+    # Generate a range of months from January (1) to December (12)
+    all_months = range(1, 13)
+
+    # Find missing months
+    missing_months = set(all_months) - set(existing_months)
+
+    # Display missing months
+    print("Missing Months:")
+    for month in missing_months:
+        print(f"{month:02}")
+
+# Input file path
+file_path = input("Enter the path to the TXT file: ")
+
+# Call the function
+find_missing_months(file_path)
